@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/Iridescent/iridescent.tres" type="Shader" id=1]
+
+[sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/Color = Color( 0.435294, 0.219608, 0.564706, 1 )
+shader_param/RefractiveIndex = Vector3( 0.7, 0.7, 0.7 )
+shader_param/Banding = 0.1
+shader_param/Metallic = null
+shader_param/Roughness = null
+shader_param/Specular = null
+
+[node name="GasolineSpill" type="Spatial"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

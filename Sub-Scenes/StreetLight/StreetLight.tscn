@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Models/Streetlight_Single.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+params_point_size = 68.4
+albedo_color = Color( 0.882353, 0.980392, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.866667, 0, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = true
+
+[node name="StreetLight" type="Spatial"]
+
+[node name="Streetlight_Single" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = null
+material/1 = SubResource( 1 )
+material/2 = null
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 8.35187e-023, -4.37114e-008, -4.37114e-008, 1.91069e-015, -1, 0, 1, 1.91069e-015, 0.00228879, 1.20198, 0.00213167 )
+light_color = Color( 1, 1, 0.411765, 1 )
+light_energy = 2.5
+light_indirect_energy = 0.5
+light_bake_mode = 0
+shadow_enabled = true
+omni_shadow_mode = 0

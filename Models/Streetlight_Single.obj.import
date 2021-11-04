@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Streetlight_Single.obj-04019f8980c34cfdc3de44b1b1163869.mesh"
+
+[deps]
+
+files=[ "res://.import/Streetlight_Single.obj-04019f8980c34cfdc3de44b1b1163869.mesh" ]
+
+source_file="res://Models/Streetlight_Single.obj"
+dest_files=[ "res://.import/Streetlight_Single.obj-04019f8980c34cfdc3de44b1b1163869.mesh", "res://.import/Streetlight_Single.obj-04019f8980c34cfdc3de44b1b1163869.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

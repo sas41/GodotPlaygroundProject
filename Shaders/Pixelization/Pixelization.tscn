@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/Pixelization/Pixelization.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/Pixelization/PixelizationShader.tres" type="Material" id=2]
+[ext_resource path="res://Defaults/white.png" type="Texture" id=3]
+
+[node name="Pixelization" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="PixelizationShader" type="TextureRect" parent="."]
+material = ExtResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1

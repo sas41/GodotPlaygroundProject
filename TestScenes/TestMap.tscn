@@ -1,0 +1,137 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Sub-Scenes/SpectatorCamera/SpectatorCamera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Models/OpenBarn.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Sub-Scenes/StreetLight/StreetLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Models/Street_Empty.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Sub-Scenes/Water/Water.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sub-Scenes/Water/Ocean.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Shaders/Pixelization/Pixelization.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 4.5, 3, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.286275, 0.270588, 0.270588, 1 )
+roughness = 0.7
+
+[sub_resource type="CapsuleMesh" id=3]
+radius = 0.1
+mid_height = 8.0
+
+[node name="TestMap" type="Spatial"]
+
+[node name="SpectatorCamera" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78438, 7.85465 )
+
+[node name="Enviroment" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+
+[node name="GIProbe" type="GIProbe" parent="Enviroment"]
+visible = false
+subdiv = 3
+dynamic_range = 16
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Geometry" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OpenBarn" type="MeshInstance" parent="Geometry"]
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StreetLight1" parent="Geometry" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4 )
+
+[node name="StreetLight2" parent="Geometry" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4 )
+
+[node name="Street_Empty" type="MeshInstance" parent="Geometry"]
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.1, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Well" type="Spatial" parent="Geometry"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.57291, 0 )
+
+[node name="4x4Water" parent="Geometry/Well" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 0, 1, 0 )
+
+[node name="MiniOpenBarn" type="MeshInstance" parent="Geometry/Well"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -1.45, 0 )
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Well"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MeshInstance2" type="MeshInstance" parent="Geometry/Well"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MeshInstance3" type="MeshInstance" parent="Geometry/Well"]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, -2, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MeshInstance4" type="MeshInstance" parent="Geometry/Well"]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 2, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OmniLight" type="OmniLight" parent="Geometry/Well"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.99996, 2.4496, -1.53912 )
+light_energy = 5.0
+light_indirect_energy = 0.5
+shadow_enabled = true
+omni_range = 3.02299
+
+[node name="pole" type="MeshInstance" parent="Geometry/Well"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, -1.37478, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Ocean" parent="Geometry" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -59 )
+
+[node name="Shaders" type="Spatial" parent="."]
+
+[node name="Pixelization" parent="Shaders" instance=ExtResource( 7 )]
