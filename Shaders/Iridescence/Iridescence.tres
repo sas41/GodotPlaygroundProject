@@ -313,7 +313,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -327.874, -278.625 )
+graph_offset = Vector2( -482.058, -34.081 )
 nodes/vertex/8/node = SubResource( 9 )
 nodes/vertex/8/position = Vector2( 63, 278 )
 nodes/vertex/connections = PoolIntArray( 8, 0, 0, 6 )

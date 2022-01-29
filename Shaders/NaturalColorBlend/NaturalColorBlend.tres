@@ -1,0 +1,121 @@
+[gd_resource type="VisualShader" load_steps=12 format=2]
+
+[ext_resource path="res://Shaders/NaturalColorBlend/BlendNoise.tres" type="Texture" id=1]
+
+[sub_resource type="VisualShaderNodeInput" id=6]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=7]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=8]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 3, 2, 3 ) ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=9]
+function = 31
+
+[sub_resource type="VisualShaderNodeTexture" id=10]
+texture = ExtResource( 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=1]
+output_port_for_preview = 0
+uniform_name = "DefaultColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=2]
+output_port_for_preview = 0
+uniform_name = "BlendInColor"
+
+[sub_resource type="VisualShaderNodeVectorInterp" id=3]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=4]
+uniform_name = "BlendRatio"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=5]
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform vec4 DefaultColor : hint_color;
+uniform vec4 BlendInColor : hint_color;
+uniform sampler2D tex_frg_14;
+uniform float BlendRatio;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ColorUniform:2
+	vec3 n_out2p0 = DefaultColor.rgb;
+	float n_out2p1 = DefaultColor.a;
+
+// ColorUniform:3
+	vec3 n_out3p0 = BlendInColor.rgb;
+	float n_out3p1 = BlendInColor.a;
+
+// Input:10
+	vec3 n_out10p0 = vec3(UV, 0.0);
+
+// VectorOp:12
+	vec3 n_in12p1 = vec3(3.00000, 2.00000, 3.00000);
+	vec3 n_out12p0 = n_out10p0 * n_in12p1;
+
+// Texture:14
+	vec4 tex_frg_14_read = texture(tex_frg_14, n_out12p0.xy);
+	vec3 n_out14p0 = tex_frg_14_read.rgb;
+	float n_out14p1 = tex_frg_14_read.a;
+
+// VectorDecompose:11
+	float n_out11p0 = n_out14p0.x;
+	float n_out11p1 = n_out14p0.y;
+	float n_out11p2 = n_out14p0.z;
+
+// ScalarFunc:13
+	float n_out13p0 = 1.0 - n_out11p0;
+
+// ScalarUniform:5
+	float n_out5p0 = BlendRatio;
+
+// ScalarOp:8
+	float n_out8p0 = n_out13p0 * n_out5p0;
+
+// VectorMix:4
+	vec3 n_out4p0 = mix(n_out2p0, n_out3p0, vec3(n_out8p0));
+
+// Output:0
+	ALBEDO = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -1479.75, 202.667 )
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( -1540, -280 )
+nodes/fragment/3/node = SubResource( 2 )
+nodes/fragment/3/position = Vector2( -1540, 40 )
+nodes/fragment/4/node = SubResource( 3 )
+nodes/fragment/4/position = Vector2( -100, 20 )
+nodes/fragment/5/node = SubResource( 4 )
+nodes/fragment/5/position = Vector2( -840, 560 )
+nodes/fragment/8/node = SubResource( 5 )
+nodes/fragment/8/position = Vector2( -500, 460 )
+nodes/fragment/10/node = SubResource( 6 )
+nodes/fragment/10/position = Vector2( -2120, 400 )
+nodes/fragment/11/node = SubResource( 7 )
+nodes/fragment/11/position = Vector2( -1180, 500 )
+nodes/fragment/12/node = SubResource( 8 )
+nodes/fragment/12/position = Vector2( -1840, 460 )
+nodes/fragment/13/node = SubResource( 9 )
+nodes/fragment/13/position = Vector2( -860, 420 )
+nodes/fragment/14/node = SubResource( 10 )
+nodes/fragment/14/position = Vector2( -1520, 400 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 4, 0, 3, 0, 4, 1, 4, 0, 0, 0, 5, 0, 8, 1, 8, 0, 4, 2, 10, 0, 12, 0, 11, 0, 13, 0, 13, 0, 8, 0, 12, 0, 14, 0, 14, 0, 11, 0 )
